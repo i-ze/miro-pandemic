@@ -145,11 +145,7 @@ class PlayerCard extends Card {
             renderFn: DEFAULT_ITEM_SHAPE_RENDER_FN,
         }))
 
-        this.city = props.city;
-    }
-
-    get label() {
-        return this.city;
+        this.label = props.label;
     }
 
     get style() {

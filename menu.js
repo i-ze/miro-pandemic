@@ -9,13 +9,14 @@ const drawInfectionCardBtn = document.getElementById('draw-infection-card')
 const drawBottomInfectionCardBtn = document.getElementById('draw-bottom-infection-card')
 const mergeInfectionCardsBtn = document.getElementById('merge-infection-cards')
 
-let card = null;
+// let card = null;
 let pandemicGame = new Pandemic();
 miro.onReady(() => {
     newGameBtn.onclick = (e) => {
         pandemicGame.newGame();
     }
 
+    /*
     createCardBtn.onclick = (e) => {
         console.log("new card");
         if (card == null) {
@@ -52,7 +53,7 @@ miro.onReady(() => {
             // let res = card.move(20, 20, 30);
             Animation.linear(card, 100, 40, 360, 800);
         }
-    }
+    }*/
 
     drawPlayerCardBtn.onclick = (e) => {
         console.log("Játékoskártya húzás a pandemicGame.playerDeck-ből");
