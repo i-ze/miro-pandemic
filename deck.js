@@ -21,8 +21,10 @@ class Deck {
     constructor(props) {
         // super(props);
         this.pile = Array.isArray(props.cards) ? props.cards : [];
-        console.log("Created deck from the following cards", this.pile);
+        console.log("Created deck from the following cards", this.pile, props);
         this.element = null;
+        this.x = props.x;
+        this.y = props.y;
         this.render();
     }
 
@@ -46,10 +48,12 @@ class Deck {
         //TODO remove card from pile & make it visible (
         if(this.pile.length>0) {
             let drawnCard = this.pile.shift();
-            console.log("Húzott lap:", drawnCard);
-
+            console.log("Húzott lap:", drawnCard, "deck", this);
+            const thisDeck = this;
             this.render();
-            return drawnCard.create().then(card => drawnCard.show()) //TODO nem mindig kell show(); van, h pont el kellene rejteni
+            return drawnCard.create()
+                .then(card => drawnCard.update(thisDeck.x, thisDeck.y))
+                .then(card => drawnCard.show()) //TODO nem mindig kell show(); van, h pont el kellene rejteni
             // return drawnCard.show();
         } else {
             return Promise.reject("Empty deck");

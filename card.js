@@ -48,6 +48,10 @@ const DEFAULT_ITEM_HIDE_FN = (item, element) => {
     return miro.board.widgets.update({id: element.id, clientVisible: false});
 }
 
+const DEFAULT_ITEM_UPDATE_FN = (item, element, x, y) => {
+    return miro.board.widgets.update({id: element.id, x: x, y: y});
+}
+
 const DEFAULT_ITEM_MOVE_FN = (item, element, deltaX, deltaY, deltaRotation) => {
     return miro.board.widgets.transformDelta(element.id, deltaX, deltaY, deltaRotation);
 }
@@ -69,6 +73,7 @@ class Card {
         this.removeFn = typeof props.removeFn === "function" ? props.removeFn : DEFAULT_ITEM_REMOVE_FN;
         this.showFn = typeof props.showFn === "function" ? props.showFn : DEFAULT_ITEM_SHOW_FN;
         this.hideFn = typeof props.hideFn === "function" ? props.hideFn : DEFAULT_ITEM_HIDE_FN;
+        this.updateFn = typeof props.updateFn === "function" ? props.updateFn : DEFAULT_ITEM_UPDATE_FN;
         this.moveFn = typeof props.moveFn === "function" ? props.moveFn : DEFAULT_ITEM_MOVE_FN;
         this.element = null;
 
@@ -94,7 +99,15 @@ class Card {
 
     hide() {
         if (this.element) {
-            this.hideFn(this, this.element).then(this._single).then(this._updateElement)
+            return this.hideFn(this, this.element).then(this._single).then(this._updateElement)
+        } else {
+            return Promise.reject("Element is missing");
+        }
+    }
+
+    update(x, y) {
+        if (this.element) {
+            return this.updateFn(this, this.element, x, y).then(this._single).then(this._updateElement)
         } else {
             return Promise.reject("Element is missing");
         }
@@ -139,10 +152,6 @@ class PlayerCard extends Card {
         return this.city;
     }
 
-    get visible() {
-        return true;
-    }
-
     get style() {
         return {
             backgroundColor: "#385BA0",
@@ -176,10 +185,6 @@ class InfectionCard extends Card {
 
     get label() {
         return this.city;
-    }
-
-    get visible() {
-        return true;
     }
 
     get style() {
