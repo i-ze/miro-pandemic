@@ -4,15 +4,16 @@ const showCardBtn = document.getElementById('show-card')
 const hideCardBtn = document.getElementById('hide-card')
 const removeCardBtn = document.getElementById('remove-card')
 const moveCardBtn = document.getElementById('move-card')
+const drawPlayerCardBtn = document.getElementById('draw-player-card')
+const drawInfectionCardBtn = document.getElementById('draw-infection-card')
+const drawBottomInfectionCardBtn = document.getElementById('draw-bottom-infection-card')
+const mergeInfectionCardsBtn = document.getElementById('merge-infection-cards')
 
 let card = null;
+let pandemicGame = new Pandemic();
 miro.onReady(() => {
-
-
     newGameBtn.onclick = (e) => {
-        console.log("new game");
-        let deck = new Deck();
-        deck.shuffle();
+        pandemicGame.newGame();
     }
 
     createCardBtn.onclick = (e) => {
@@ -52,4 +53,23 @@ miro.onReady(() => {
             Animation.linear(card, 100, 40, 360, 800);
         }
     }
+
+    drawPlayerCardBtn.onclick = (e) => {
+        console.log("Játékoskártya húzás a pandemicGame.playerDeck-ből");
+        pandemicGame.drawPlayerCard();
+    }
+    drawInfectionCardBtn.onclick = (e) => {
+        console.log("[TODO] Fertőzéskártya húzás a pandemicGame.infectionDeck-ből");
+    }
+    drawBottomInfectionCardBtn.onclick = (e) => {
+        console.log("[TODO] Fertőzéskártya húzás a pandemicGame.infectionDeck aljáról");
+    }
+    mergeInfectionCardsBtn.onclick = (e) => {
+        console.log("[TODO] A kihúzott fertőzéskártyák megkeverése és visszahelyezése a fertőzéspakli tetejére");
+    }
+
+    //TODO fertőzéskártya kidobás a kihúzott fertőzéskártya deckből (véglegesen)
+    //TODO következő 6 fertőzéskártya megtekintése, sorrendbe állítása, visszahelyezése
+
+    pandemicGame.newGame();
 })

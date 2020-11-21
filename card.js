@@ -1,8 +1,10 @@
-const DEFAULT_CARD_RENDERER = (card) => {
+const DEFAULT_ITEM_IMAGE_RENDER_FN = (card) => {
+    let metadata = {};
+    metadata[APP_ID] = typeof card.metadata === "object" ? card.metadata : {};
     let promise = miro.board.widgets.create({
         "type": "image",
         "text": "developer card",
-        //"metadata": card.metadata,
+        "metadata": metadata,
         clientVisible: false,
         // "style": {
         //     "backgroundColor": "#ff00ff"
@@ -15,19 +17,39 @@ const DEFAULT_CARD_RENDERER = (card) => {
     return promise.then(response => response[0]);
 };
 
-const DEFAULT_CARD_REMOVER = (card) => {
-    return miro.board.widgets.deleteById([card.element.id])
+
+const DEFAULT_ITEM_SHAPE_RENDER_FN = (item) => {
+    let metadata = {};
+    console.log("shape render fn", item);
+    metadata[APP_ID] = typeof item.metadata === "object" ? item.metadata : {};
+    let promise = miro.board.widgets.create({
+        "type": "shape",
+        "metadata": metadata,
+        clientVisible: item.visible || false,
+        "text": item.label || (item.metadata && item.metadata.id ? "id:" + item.metadata.id : "UNKNOWN ITEM"),
+        "style": item.style || {
+            "backgroundColor": "#FF516A"
+        },
+        width: item.width || 100,
+        height: item.height || 100,
+        scale: item.scale || 1
+    });
+    return promise.then(response => response[0]);
+};
+
+const DEFAULT_ITEM_REMOVE_FN = (item, element) => {
+    return miro.board.widgets.deleteById([element.id])
 }
 
-const DEFAULT_CARD_SHOWER = (card, element) => {
+const DEFAULT_ITEM_SHOW_FN = (item, element) => {
     return miro.board.widgets.update({id: element.id, clientVisible: true});
 }
 
-const DEFAULT_CARD_HIDER = (card, element) => {
+const DEFAULT_ITEM_HIDE_FN = (item, element) => {
     return miro.board.widgets.update({id: element.id, clientVisible: false});
 }
 
-const DEFAULT_CARD_MOVER = (card, element, deltaX, deltaY, deltaRotation) => {
+const DEFAULT_ITEM_MOVE_FN = (item, element, deltaX, deltaY, deltaRotation) => {
     return miro.board.widgets.transformDelta(element.id, deltaX, deltaY, deltaRotation);
 }
 
@@ -44,11 +66,11 @@ class Card {
      */
     constructor(props) {
         this.metadata = props.metadata;
-        this.renderer = typeof props.renderer === "function" ? props.renderer : DEFAULT_CARD_RENDERER;
-        this.remover = typeof props.remover === "function" ? props.remover : DEFAULT_CARD_REMOVER;
-        this.shower = typeof props.shower === "function" ? props.remover : DEFAULT_CARD_SHOWER;
-        this.hider = typeof props.hider === "function" ? props.remover : DEFAULT_CARD_HIDER;
-        this.mover = typeof props.mover === "function" ? props.mover : DEFAULT_CARD_MOVER;
+        this.renderFn = typeof props.renderFn === "function" ? props.renderFn : DEFAULT_ITEM_IMAGE_RENDER_FN;
+        this.removeFn = typeof props.removeFn === "function" ? props.removeFn : DEFAULT_ITEM_REMOVE_FN;
+        this.showFn = typeof props.showFn === "function" ? props.showFn : DEFAULT_ITEM_SHOW_FN;
+        this.hideFn = typeof props.hideFn === "function" ? props.hideFn : DEFAULT_ITEM_HIDE_FN;
+        this.moveFn = typeof props.moveFn === "function" ? props.moveFn : DEFAULT_ITEM_MOVE_FN;
         this.element = null;
 
         this._updateElement = this._updateElement.bind(this);
@@ -57,7 +79,7 @@ class Card {
 
     create() {
         if (!this.element) {
-            return this.renderer(this).then(this._updateElement)
+            return this.renderFn(this).then(this._updateElement)
         } else {
             return Promise.reject("Element is already present");
         }
@@ -65,7 +87,7 @@ class Card {
 
     show() {
         if (this.element) {
-            return this.shower(this, this.element).then(this._single).then(this._updateElement)
+            return this.showFn(this, this.element).then(this._single).then(this._updateElement)
         } else {
             return Promise.reject("Element is missing");
         }
@@ -73,7 +95,7 @@ class Card {
 
     hide() {
         if (this.element) {
-            this.hider(this, this.element).then(this._single).then(this._updateElement)
+            this.hideFn(this, this.element).then(this._single).then(this._updateElement)
         } else {
             return Promise.reject("Element is missing");
         }
@@ -81,7 +103,7 @@ class Card {
 
     destroy() {
         if (this.element) {
-            return this.remover(this).then(() => null).then(this._updateElement)
+            return this.removeFn(this, this.element).then(() => null).then(this._updateElement)
         } else {
             return Promise.reject("Element is missing");
         }
@@ -89,7 +111,7 @@ class Card {
 
     move(deltaX, deltaY, deltaRotation) {
         if (this.element) {
-            return this.mover(this, this.element, deltaX, deltaY, deltaRotation).then(this._single).then(this._updateElement)
+            return this.moveFn(this, this.element, deltaX, deltaY, deltaRotation).then(this._single).then(this._updateElement)
         } else {
             return Promise.reject("Element is missing");
         }
@@ -103,6 +125,42 @@ class Card {
         this.element = result;
         return this;
     }
+}
 
+class PlayerCard extends Card {
+    constructor(props) {
+        super(Object.assign(props, {
+            renderFn: DEFAULT_ITEM_SHAPE_RENDER_FN,
+        }))
 
+        this.city = props.city;
+    }
+
+    get label() {
+        return this.city;
+    }
+
+    get visible() {
+        return true;
+    }
+
+    get style() {
+        return {
+            backgroundColor: "#385BA0",
+            textColor: "#ffffff",
+            shapeType: 7, /*3: rectangle, 4: circle, 7: rounded rectangle*/
+        }
+    }
+
+    get width() {
+        return 82
+    }
+
+    get height() {
+        return 112
+    }
+
+    get scale() {
+        return 1
+    }
 }

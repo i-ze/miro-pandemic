@@ -1,0 +1,1 @@
+const APP_ID = '3074457351840249299'; //THIS IS THE PANDEMIC PLUGIN (APP) ID. Needed to store metadata.
