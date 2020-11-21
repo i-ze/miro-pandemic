@@ -60,6 +60,7 @@ miro.onReady(() => {
     }
     drawInfectionCardBtn.onclick = (e) => {
         console.log("[TODO] Fertőzéskártya húzás a pandemicGame.infectionDeck-ből");
+        pandemicGame.drawInfectionCard();
     }
     drawBottomInfectionCardBtn.onclick = (e) => {
         console.log("[TODO] Fertőzéskártya húzás a pandemicGame.infectionDeck aljáról");

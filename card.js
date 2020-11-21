@@ -31,8 +31,7 @@ const DEFAULT_ITEM_SHAPE_RENDER_FN = (item) => {
             "backgroundColor": "#FF516A"
         },
         width: item.width || 100,
-        height: item.height || 100,
-        scale: item.scale || 1
+        height: item.height || 100
     });
     return promise.then(response => response[0]);
 };
@@ -158,6 +157,45 @@ class PlayerCard extends Card {
 
     get height() {
         return 112
+    }
+
+    get scale() {
+        return 1
+    }
+}
+
+
+class InfectionCard extends Card {
+    constructor(props) {
+        super(Object.assign(props, {
+            renderFn: DEFAULT_ITEM_SHAPE_RENDER_FN,
+        }))
+
+        this.city = props.city;
+    }
+
+    get label() {
+        return this.city;
+    }
+
+    get visible() {
+        return true;
+    }
+
+    get style() {
+        return {
+            backgroundColor: "#3ba04a",
+            textColor: "#ffffff",
+            shapeType: 7, /*3: rectangle, 4: circle, 7: rounded rectangle*/
+        }
+    }
+
+    get width() {
+        return 112
+    }
+
+    get height() {
+        return 82
     }
 
     get scale() {
