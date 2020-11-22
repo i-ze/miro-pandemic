@@ -11,9 +11,9 @@ const widgetTextElement = document.getElementById('widget-text')
 async function getWidget() {
   // Get selected widgets
   let widgets = await miro.board.selection.get()
-
+  console.log("widgets", widgets);
   // Get first widget from selected widgets
-  let text = widgets[0].text
+  let text = widgets.length > 0 ? widgets[0].text : null;
 
   // Check that widget has text field
   if (typeof text === 'string') {

@@ -8,7 +8,7 @@
       .rtb-sidebar-caption {
         font-size: 14px;
         font-weight: bold;
-        color: rgba(0, 0, 0, 0.8);
+        color: rgba(207, 248, 117, 0.8);
         padding: 24px 0 0 24px;
       }
 
@@ -34,10 +34,64 @@
       }
       body {
         padding: 10px;
+        background-color: #1c1c1e;
+        color: #cccccc;
       }
       .content {
         padding: 10px;
       }
+
+      .myButton {
+        box-shadow:inset 0px -3px 7px 0px #29bbff;
+        background:linear-gradient(to bottom, #2dabf9 5%, #0688fa 100%);
+        background-color:#2dabf9;
+        border-radius:3px;
+        border:1px solid #0b0e07;
+        display:inline-block;
+        cursor:pointer;
+        color:#ffffff;
+        font-family:Arial;
+        font-size:15px;
+        padding:9px 23px;
+        text-decoration:none;
+        text-shadow:0px 1px 0px #263666;
+      }
+      .myButton:hover {
+        background:linear-gradient(to bottom, #0688fa 5%, #2dabf9 100%);
+        background-color:#0688fa;
+      }
+      .myButton:active {
+        position:relative;
+        top:1px;
+      }
+
+
+      .myButton2 {
+        box-shadow:inset 0px -3px 7px 0px #3dc21b;
+        background:linear-gradient(to bottom, #44c767 5%, #5cbf2a 100%);
+        background-color:#44c767;
+        border-radius:3px;
+        border:1px solid #18ab29;
+        display:inline-block;
+        cursor:pointer;
+        color:#ffffff;
+        font-family:Arial;
+        font-size:15px;
+        padding:9px 23px;
+        text-decoration:none;
+        text-shadow:0px 1px 0px #2f6627;
+      }
+      .myButton2:hover {
+        background:linear-gradient(to bottom, #5cbf2a 5%, #44c767 100%);
+        background-color:#5cbf2a;
+      }
+      .myButton2:active {
+        position:relative;
+        top:1px;
+      }
+
+
+
     </style>
   </head>
 
@@ -45,17 +99,12 @@
     <div class="rtb-sidebar-caption">Pandemic Game Controller</div>
     <div class="content">
       <div class="menu">
-      <button id="button-new-game">NEW GAME</button> <br />
-      <!--button id="create-card">CREATE CARD</button> <br />
-      <button id="show-card">SHOW CARD</button> <br />
-      <button id="hide-card">HIDE CARD</button> <br />
-      <button id="remove-card">REMOVE CARD</button> <br />
-      <button id="move-card">MOVE CARD</button> <br /-->
-
-      <button id="draw-player-card">DRAW PLAYER CARD</button> <br />
-      <button id="draw-infection-card">DRAW INFECTION CARD</button> <br />
-      <button id="draw-bottom-infection-card">DRAW BOTTOM INFECTION CARD</button> <br />
-      <button id="merge-infection-cards">MERGE INFECTION CARDS</button> <br />
+        <br /><br />
+      <button class="myButton2" id="button-new-game">Új játék</button> <br /><br /> <br /><br />
+      <button class="myButton" id="draw-player-card">Játékoskártya húzás</button> <br /><br />
+      <button class="myButton" id="draw-infection-card">Fertőzéskártya húzás</button> <br /><br />
+      <button class="myButton" id="draw-bottom-infection-card">Fertőzéskártya húzás a pakli aljáról</button> <br /><br />
+      <button class="myButton" id="merge-infection-cards">Fertőzéskártyák visszakeverése</button> <br /><br />
 
       </div>
       <div class="tip" id="tip">Select widget to see its text</div>
@@ -65,8 +114,9 @@
     <script src="plugin-config.js"></script>
     <script src="sidebar.js"></script>
     <script src="animation.js"></script>
-    <script src="deck.js"></script>
+    <script src="component.js"></script>
     <script src="card.js"></script>
+    <script src="deck.js"></script>
     <script src="pandemic.js"></script>
     <script src="menu.js"></script>
 

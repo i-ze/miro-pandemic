@@ -1,6 +1,6 @@
 class Animation {
     static linear(moveable, deltaX, deltaY, deltaRotation, timeMs) {
-        const frameDuration = 100;
+        const frameDuration = 200;
         const frames = Math.ceil(timeMs / frameDuration);
         const stepX = deltaX / frames;
         const stepY = deltaY / frames;
