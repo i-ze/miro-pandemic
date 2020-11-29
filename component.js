@@ -1,7 +1,7 @@
 const DEFAULT_ITEM_IMAGE_RENDER_FN = (item, props) => {
     let metadata = {};
     let override = typeof props === "object" ? props : {};
-    metadata[APP_ID] = typeof item.metadata === "object" ? item.metadata : {};
+    metadata[APP_ID] = Object.assign({"is_pandemic_game_element":true}, item.metadata, props ? props.metadata: null);
     let promise = miro.board.widgets.create({
         "type": "image",
         "metadata": metadata,
@@ -17,21 +17,22 @@ const DEFAULT_ITEM_IMAGE_RENDER_FN = (item, props) => {
 };
 
 
-const DEFAULT_ITEM_SHAPE_RENDER_FN = (item) => {
+const DEFAULT_ITEM_SHAPE_RENDER_FN = (item, props) => {
     let metadata = {};
-    metadata[APP_ID] = typeof item.metadata === "object" ? item.metadata : {};
+    let override = typeof props === "object" ? props : {};
+    metadata[APP_ID] = Object.assign({"is_pandemic_game_element":true}, item.metadata, props ? props.metadata: null);
     let promise = miro.board.widgets.create({
         "type": "shape",
         "metadata": metadata,
         // clientVisible: item.visible || false,
         "text": item.label || (item.metadata && item.metadata.id ? "id:" + item.metadata.id : "UNKNOWN ITEM"),
-        "style": item.style || {
+        "style": props.style || item.style || {
             "backgroundColor": "#FF516A"
         },
-        width: item.width || 100,
-        height: item.height || 100,
-        x: item.x || 0,
-        y: item.y || 0
+        width: override.width || item.width || 100,
+        height: override.height || item.height || 100,
+        x: override.x || item.x || 0,
+        y: override.y || item.y || 0
     });
     return promise.then(response => response[0]);
 };

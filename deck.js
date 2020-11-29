@@ -46,34 +46,37 @@ class Deck extends Component {
     }
 
 
-    drawCard() {
+    drawCard(props) {
         if (this.pile.length > 0) {
             let drawnCard = this.pile.shift();
             console.log("Húzott lap:", drawnCard.label);
-            const thisDeck = this;
+            const config = Object.assign({}, props)
             this.render();
-            return drawnCard.create({x: this.x, y: this.y})
-                .then(card => drawnCard.update(thisDeck.x, thisDeck.y))
+            return drawnCard.create({x: this.x, y: this.y, style: config.style})
         } else {
             return Promise.reject("Empty deck");
         }
-
     }
 
-    removeAll() {
-         const ret = this.pile;
-         this.pile = [];
-         return ret;
+    drawCardAtIndex(index, props) {
+        if (this.pile.length > index) {
+            let drawnCard = this.pile.splice(index,1)[0]
+            console.log("Húzott lap:", drawnCard.label);
+            const config = Object.assign({}, props)
+            this.render();
+            return drawnCard.create({x: this.x, y: this.y, style: config.style})
+        } else {
+            return Promise.reject("Empty deck");
+        }
     }
 
-    drawCardFromBottom() {
+    drawCardFromBottom(props) {
         if (this.pile.length > 0) {
             let drawnCard = this.pile.pop();
             console.log("Alulról húzott lap:", drawnCard.label);
-            const thisDeck = this;
+            const config = Object.assign({}, props)
             this.render();
-            return drawnCard.create({x: this.x, y: this.y})
-                .then(card => drawnCard.update(thisDeck.x, thisDeck.y))
+            return drawnCard.create({x: this.x, y: this.y, style: config.style})
         } else {
             return Promise.reject("Empty deck");
         }
@@ -88,6 +91,18 @@ class Deck extends Component {
             return Promise.resolve(this);
         }
     }
+
+
+    getSize() {
+        return this.pile.length;
+    }
+
+    removeAll() {
+        const ret = this.pile;
+        this.pile = [];
+        return ret;
+    }
+
 
 }
 

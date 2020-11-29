@@ -4,7 +4,7 @@ class PlayerCard extends Component {
             renderFn: DEFAULT_ITEM_SHAPE_RENDER_FN,
         }, props))
         let defaultStyle = {
-            backgroundColor: "#a01a81",
+            backgroundColor: props.color || "#a01a81",
             textColor: "#ffffff",
             shapeType: 7, /*3: rectangle, 4: circle, 7: rounded rectangle*/
         };

@@ -41,55 +41,75 @@
         padding: 10px;
       }
 
-      .myButton {
-        box-shadow:inset 0px -3px 7px 0px #29bbff;
-        background:linear-gradient(to bottom, #2dabf9 5%, #0688fa 100%);
-        background-color:#2dabf9;
+      .menu-btn {
         border-radius:3px;
-        border:1px solid #0b0e07;
         display:inline-block;
         cursor:pointer;
-        color:#ffffff;
         font-family:Arial;
         font-size:15px;
         padding:9px 23px;
         text-decoration:none;
+      }
+
+      .menu-btn:active {
+        position:relative;
+        top:1px;
+      }
+
+      .btn-blue {
+        box-shadow:inset 0px -3px 7px 0px #29bbff;
+        background:linear-gradient(to bottom, #2dabf9 5%, #0688fa 100%);
+        background-color:#2dabf9;
+        border:1px solid #0b0e07;
+        color:#ffffff;
         text-shadow:0px 1px 0px #263666;
       }
       .myButton:hover {
         background:linear-gradient(to bottom, #0688fa 5%, #2dabf9 100%);
         background-color:#0688fa;
       }
-      .myButton:active {
-        position:relative;
-        top:1px;
-      }
 
 
-      .myButton2 {
+      .btn-light-green {
         box-shadow:inset 0px -3px 7px 0px #3dc21b;
         background:linear-gradient(to bottom, #44c767 5%, #5cbf2a 100%);
         background-color:#44c767;
-        border-radius:3px;
         border:1px solid #18ab29;
-        display:inline-block;
-        cursor:pointer;
         color:#ffffff;
-        font-family:Arial;
-        font-size:15px;
-        padding:9px 23px;
-        text-decoration:none;
         text-shadow:0px 1px 0px #2f6627;
       }
-      .myButton2:hover {
+      .btn-light-green:hover {
         background:linear-gradient(to bottom, #5cbf2a 5%, #44c767 100%);
         background-color:#5cbf2a;
       }
-      .myButton2:active {
-        position:relative;
-        top:1px;
+
+      .btn-green {
+        box-shadow: inset 0px -3px 7px 0px #34610b;
+        background: linear-gradient(to bottom, #13ff9d 5%, #04b309 100%);
+        background-color: #1ea529;
+        border:1px solid #18ab29;
+        color:#ffffff;
+        text-shadow:0px 1px 0px #1b661d;
       }
 
+      .btn-green:hover {
+        background:linear-gradient(to bottom, #5cbf2a 5%, #44c767 100%);
+        background-color:#5cbf2a;
+      }
+
+      .btn-red {
+        box-shadow: inset 0px -3px 7px 0px #611813;
+        background: linear-gradient(to bottom, #ff1e26 5%, #b32716 100%);
+        background-color: #a5181a;
+        border:1px solid #640a16;
+        color:#ffffff;
+        text-shadow:0px 1px 0px #660d14;
+      }
+
+      .btn-red:hover {
+        background:linear-gradient(to bottom, #bf2721 5%, #c71c2f 100%);
+        background-color: #bf1419;
+      }
 
 
     </style>
@@ -99,12 +119,15 @@
     <div class="rtb-sidebar-caption">Pandemic Game Controller</div>
     <div class="content">
       <div class="menu">
-        <br /><br />
-      <button class="myButton2" id="button-new-game">Új játék</button> <br /><br /> <br /><br />
-      <button class="myButton" id="draw-player-card">Játékoskártya húzás</button> <br /><br />
-      <button class="myButton" id="draw-infection-card">Fertőzéskártya húzás</button> <br /><br />
-      <button class="myButton" id="draw-bottom-infection-card">Fertőzéskártya húzás a pakli aljáról</button> <br /><br />
-      <button class="myButton" id="merge-infection-cards">Fertőzéskártyák visszakeverése</button> <br /><br />
+        <br />
+      <button class="menu-btn btn-light-green" id="button-new-game">🆕 Új játék</button> <br /><br /> <br />
+      <button class="menu-btn btn-blue" id="draw-player-card">🏙 Játékoskártya húzás</button> <br /><br />
+      <button class="menu-btn btn-green" id="draw-infection-card">🦠 Fertőzéskártya húzás</button> <br /><br /><br /><br />
+      <button class="menu-btn btn-blue" id="draw-bottom-infection-card">💥 Fertőzéskártya húzás alulról</button> <br /><br />
+      <button class="menu-btn btn-blue" id="merge-infection-cards">♻️ Fertőzéskártyák visszakeverése</button> <br /><br />
+      <button class="menu-btn btn-red" id="remove-card-from-game">❌ Kártya kidobása a játékból</button> <br /><br />
+      <button class="menu-btn btn-blue" id="peek-next-cards">👀 Előrejelzés</button> <br /><br />
+      <button class="menu-btn btn-blue" id="return-peeked-card">➡️ Előrejezés: kártya visszatétel</button> <br /><br />
 
       </div>
       <div class="tip" id="tip">Select widget to see its text</div>
@@ -112,6 +135,7 @@
     </div>
     <script src="https://miro.com/app/static/sdk.1.1.js"></script>
     <script src="plugin-config.js"></script>
+    <script src="selection.js"></script>
     <script src="sidebar.js"></script>
     <script src="animation.js"></script>
     <script src="component.js"></script>
