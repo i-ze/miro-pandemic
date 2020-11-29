@@ -81,6 +81,6 @@ class RoleCard extends Component {
     }
 
     get scale() {
-        return 1
+        return 0.3
     }
 }

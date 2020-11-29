@@ -6,7 +6,7 @@
 
   function onSelectionChanged(widgets) {
     // Get selected widgets
-    console.log("onsel widgets", widgets);
+    // console.log("onsel widgets", widgets);
     // Get first widget from selected widgets
     let text = widgets.length > 0 ? widgets[0].text : null;
 

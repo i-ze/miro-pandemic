@@ -21,7 +21,7 @@ class SelectionMonitor {
         {
             const listener = this.listeners[i];
             try {
-                console.log("calling listener",i,  widgets);
+                // console.log("calling listener",i,  widgets);
                 listener(widgets);
             } catch (e) {
                 console.error("error", e);

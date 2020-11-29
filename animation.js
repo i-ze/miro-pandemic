@@ -13,7 +13,7 @@ class Animation {
                 if (frame < frames) {
                     setTimeout(renderNext, frameDuration);
                 } else {
-                    console.log("animation finished", moveable)
+                    // console.log("animation finished", moveable)
                     resolve("Animation finished", moveable);
                 }
             }

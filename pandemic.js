@@ -104,12 +104,13 @@ class Pandemic {
         this.roleCardsDeck = new Deck({
             name: "Szerepkártya pakli",
             cards: this.createRoleCards(),
-            faceVisible: false,
+            faceVisible: true,
             x: 300,
             y: 500,
             metadata: {info: "Szerepkártya pakli"}
         })
-        console.log("Role cards deck", this.roleCardsDeck)
+
+        this.roleCardsDeck.shuffle();
     }
 
     createPlayerCards(numberOfEpidemicCards) {
@@ -242,9 +243,7 @@ class Pandemic {
         const sel = BoardSelection.getSelection();
         if (sel.length == 1) {
 
-            console.log("find", sel[0], this.peekCardsDeck);
             let card = this.peekCardsDeck.pile.find(card => {
-                console.log("comparing", card.element, sel[0], card.element.id === sel[0].id);
                 return card.element.id === sel[0].id
             })
             const thisRef = this;

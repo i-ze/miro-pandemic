@@ -85,7 +85,7 @@ class Deck extends Component {
     render() {
         //csak a hatlapot kell itt renderelni, amig van kartya a pakliban (+ esetleg azt, h hany kartya van meg a deckben)
         if (this.element === null && !this.faceVisible) {
-            console.log("creating element for this", this.name , " el:", this.element, "faceVisible:", this.faceVisible);
+            // console.log("creating element for this", this.name , " el:", this.element, "faceVisible:", this.faceVisible);
             return this.create();
         } else {
             return Promise.resolve(this);
