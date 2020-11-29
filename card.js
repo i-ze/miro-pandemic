@@ -60,3 +60,27 @@ class InfectionCard extends Component {
         return 1
     }
 }
+
+
+class RoleCard extends Component {
+    constructor(props) {
+        super(Object.assign({
+            renderFn: DEFAULT_ITEM_IMAGE_RENDER_FN,
+        }, props))
+        this.url = `${props.url}`;
+        this.roleName = props.roleName;
+    }
+
+
+    get width() {
+        return 120
+    }
+
+    get height() {
+        return 170
+    }
+
+    get scale() {
+        return 1
+    }
+}

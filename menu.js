@@ -6,6 +6,7 @@ const mergeInfectionCardsBtn = document.getElementById('merge-infection-cards')
 const removeCardBtn = document.getElementById('remove-card-from-game')
 const peekCardsBtn = document.getElementById('peek-next-cards')
 const returnPeekCardBtn = document.getElementById('return-peeked-card')
+const drawRoleCardBtn = document.getElementById('draw-role-card')
 
 let pandemicGame = new Pandemic();
 miro.onReady(() => {
@@ -44,8 +45,17 @@ miro.onReady(() => {
         pandemicGame.returnSelectedPeekedCard();
     }
 
+    drawRoleCardBtn.onclick = (e) => {
+        console.log("Szerepkártya húzás");
+        pandemicGame.drawRoleCard();
+    }
+
     //TODO fertőzéskártya kidobás a kihúzott fertőzéskártya deckből (véglegesen)
     //TODO következő 6 fertőzéskártya megtekintése, sorrendbe állítása, visszahelyezése
 
-    pandemicGame.newGame();
+    console.log("Environment:", IS_DEV_ENV ? "DEV" : "PROD");
+    if (IS_DEV_ENV) {
+        pandemicGame.newGame();
+    }
+
 })
