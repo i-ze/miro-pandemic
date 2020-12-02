@@ -175,7 +175,7 @@ class Pandemic {
 
     drawPlayerCard() {
         this.playersCardsDeck.drawCard().then(card => {
-            Animation.linear(card, -160 /* + this.playersCardsDeck.getSize()*10* kellene ide vmi counter, ami szamolja, hany van meg helyben*/, 0, 0, 800)
+            Animation.linear(card, -410 /* + this.playersCardsDeck.getSize()*10* kellene ide vmi counter, ami szamolja, hany van meg helyben*/, -100, 0, 800)
         })
     }
 
